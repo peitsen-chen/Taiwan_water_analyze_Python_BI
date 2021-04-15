@@ -1,0 +1,105 @@
+#file=open("D:/碩班/碩一下/BI/水情資料fin-1.txt","r")
+#content=file.read()
+#print(content)
+
+
+#匯入 pandas
+import pandas as pd
+#建立dataframe
+dic = {
+    "place":['taipei','taipei','taipei','taichung','taichung','taichung','tainan','tainan','tainan'],
+    "date":[2021,2020,2019,2021,2020,2019,2021,2020,2019],
+    "capacity": [0.2222,0.4609,0.6609,0.2561,0.2724,0.4695,0.3220,0.4124,0.4069], 
+    "Rainy day": [8,17,16,3,6,13,1,3,11],
+    "person_day_wateruse": [338,332,332,290,283,279,279,272,265],
+       }
+df = pd.DataFrame(dic)
+print(df)
+
+
+#使用scipy建立統計分析
+from scipy import stats
+#df是因為前面的dataframe名叫df>把df中的capacity欄拉成一個清單(rainningday同理)
+list1=df['capacity'].tolist()
+list2=df['Rainy day'].tolist()
+slope, intercept, r_value, p_value, std_err = stats.linregress(list1, list2)
+print("slope: %f intercept: %f" % (slope, intercept))
+print("R-squared: %f" % r_value**2)
+
+list1=df['capacity'].tolist()
+list3=df['person_day_wateruse'].tolist()
+slope, intercept, r_value, p_value, std_err = stats.linregress(list1, list3)
+print("slope: %f intercept: %f" % (slope, intercept))
+print("R-squared: %f" % r_value**2)
+
+
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+#capacity and ranningday的合併圖
+
+#先在名為a的圖中畫上直條圖
+fig, a = plt.subplots()
+width=0.25
+ax1=[2019,2020,2021]          #X 軸 (第一組)
+ay1=(0.6609,0.4609,0.2222)                 #Y 軸1=0056殖利率
+ax2=[p + width for p in ax1]                        #X 軸 (第二組)
+ay2=(0.4695,0.2724,0.2561)                   #Y 軸2=0050殖利率
+ax3=[p + 2*width for p in ax1]                     #X 軸 (第三組)
+ay3=(0.4069, 0.4124,0.3220)                    #Y 軸3=0052殖利率
+
+plt.bar(ax1, ay1, label='Taipei', width=0.25,alpha=0.3)  #繪製長條圖，alpha是透明度
+plt.bar(ax2, ay2, label='Taichung', width=0.25,alpha=0.3)  #繪製長條圖
+plt.bar(ax3, ay3, label='Tainan', width=0.25,alpha=0.3)  #繪製長條圖
+plt.xticks([p + width for p in ax1], ax1)        #設定 X 軸刻度標籤
+plt.legend()                                                #顯示圖例
+plt.title('Capacity and Rainy day')                  #設定圖形標題
+plt.xlabel('Year')                                        #設定 X 軸標籤
+plt.ylabel('Capacity')             #設定 Y 軸標籤
+
+#為了繪製雙Y軸的圖，所以要有b = a.twinx()，將名為B的圖疊在A圖上
+b = a.twinx()
+#以下是B圖的內容
+plt.plot([2019,2020,2021],[16,17,8])
+plt.plot([2019,2020,2021],[13,6,3])
+plt.plot([2019,2020,2021],[11,3,1])
+plt.title('Capacity and Rainy day')
+plt.xlabel('Year')
+
+#顯示剛剛畫的圖
+plt.show()
+
+
+#capacity and ranningday的合併圖
+
+#先在名為a的圖中畫上直條圖
+fig, c = plt.subplots()
+width=0.25
+ax1=[2019,2020,2021]          #X 軸 (第一組)
+ay1=(0.6609,0.4609,0.2222)                 #Y 軸1=0056殖利率
+ax2=[p + width for p in ax1]                        #X 軸 (第二組)
+ay2=(0.4695,0.2724,0.2561)                   #Y 軸2=0050殖利率
+ax3=[p + 2*width for p in ax1]                     #X 軸 (第三組)
+ay3=(0.4069, 0.4124,0.3220)                    #Y 軸3=0052殖利率
+
+plt.bar(ax1, ay1, label='Taipei', width=0.25,alpha=0.3)  #繪製長條圖，alpha是透明度
+plt.bar(ax2, ay2, label='Taichung', width=0.25,alpha=0.3)  #繪製長條圖
+plt.bar(ax3, ay3, label='Tainan', width=0.25,alpha=0.3)  #繪製長條圖
+plt.xticks([p + width for p in ax1], ax1)        #設定 X 軸刻度標籤
+plt.legend()                                                #顯示圖例
+plt.title('Capacity and Daily water consumption per person')                  #設定圖形標題
+plt.xlabel('Year')                                        #設定 X 軸標籤
+plt.ylabel('Capacity')             #設定 Y 軸標籤
+
+#為了繪製雙Y軸的圖，所以要有b = a.twinx()，將名為B的圖疊在A圖上
+d = c.twinx()
+#以下是B圖的內容
+plt.plot([2019,2020,2021],[332,332,338])
+plt.plot([2019,2020,2021],[279,283,290])
+plt.plot([2019,2020,2021],[265,272,279])
+plt.ylabel('Daily water Cconsumption per person') 
+plt.xlabel('Year')
+
+plt.show()
