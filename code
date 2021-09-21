@@ -44,12 +44,11 @@ import matplotlib.pyplot as plt
 fig, a = plt.subplots()
 width=0.25
 ax1=[2019,2020,2021]          #X 軸 (第一組)
-ay1=(0.6609,0.4609,0.2222)                 #Y 軸1=0056殖利率
+ay1=(0.6609,0.4609,0.2222)                
 ax2=[p + width for p in ax1]                        #X 軸 (第二組)
-ay2=(0.4695,0.2724,0.2561)                   #Y 軸2=0050殖利率
+ay2=(0.4695,0.2724,0.2561)                   
 ax3=[p + 2*width for p in ax1]                     #X 軸 (第三組)
-ay3=(0.4069, 0.4124,0.3220)                    #Y 軸3=0052殖利率
-
+ay3=(0.4069, 0.4124,0.3220)                   
 plt.bar(ax1, ay1, label='Taipei', width=0.25,alpha=0.3)  #繪製長條圖，alpha是透明度
 plt.bar(ax2, ay2, label='Taichung', width=0.25,alpha=0.3)  #繪製長條圖
 plt.bar(ax3, ay3, label='Tainan', width=0.25,alpha=0.3)  #繪製長條圖
@@ -78,12 +77,11 @@ plt.show()
 fig, c = plt.subplots()
 width=0.25
 ax1=[2019,2020,2021]          #X 軸 (第一組)
-ay1=(0.6609,0.4609,0.2222)                 #Y 軸1=0056殖利率
+ay1=(0.6609,0.4609,0.2222)                 
 ax2=[p + width for p in ax1]                        #X 軸 (第二組)
-ay2=(0.4695,0.2724,0.2561)                   #Y 軸2=0050殖利率
+ay2=(0.4695,0.2724,0.2561)                  
 ax3=[p + 2*width for p in ax1]                     #X 軸 (第三組)
-ay3=(0.4069, 0.4124,0.3220)                    #Y 軸3=0052殖利率
-
+ay3=(0.4069, 0.4124,0.3220)                   
 plt.bar(ax1, ay1, label='Taipei', width=0.25,alpha=0.3)  #繪製長條圖，alpha是透明度
 plt.bar(ax2, ay2, label='Taichung', width=0.25,alpha=0.3)  #繪製長條圖
 plt.bar(ax3, ay3, label='Tainan', width=0.25,alpha=0.3)  #繪製長條圖
